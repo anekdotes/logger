@@ -30,51 +30,51 @@ class LogTest extends PHPUnit_Framework_TestCase
   public function testLogInfo()
   {
       Log::setDriver(new FileDriver('Toaster', 'tmp/test.log'));
-      $testData = ['date' => date('Y-m-d H:i:s', time()), 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'level' => 'INFO', 'test' => 'data', 'me' => 'you'];
+      $testData = ['date' => date('Y-m-d H:i:s', time()),'level' => 'INFO',  'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'test' => 'data', 'me' => 'you'];
       Log::info(['test' => 'data', 'me' => 'you']);
       $file = fopen('tmp/test.log', 'r');
       $value = fread($file, filesize('tmp/test.log'));
       fclose($file);
       unlink('tmp/test.log');
-      $this->assertJsonStringEqualsJsonString($value, json_encode($testData));
+      $this->assertEquals($value, json_encode($testData). "\n");
   }
 
   //Tests logging an info message
   public function testLogError()
   {
       Log::setDriver(new FileDriver('Toaster', 'tmp/test.log'));
-      $testData = ['date' => date('Y-m-d H:i:s', time()), 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'level' => 'ERROR', 'test' => 'data', 'me' => 'you'];
+      $testData = ['date' => date('Y-m-d H:i:s', time()),'level' => 'ERROR', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN',  'test' => 'data', 'me' => 'you'];
       Log::error(['test' => 'data', 'me' => 'you']);
       $file = fopen('tmp/test.log', 'r');
       $value = fread($file, filesize('tmp/test.log'));
       fclose($file);
       unlink('tmp/test.log');
-      $this->assertJsonStringEqualsJsonString($value, json_encode($testData));
+      $this->assertEquals($value, json_encode($testData). "\n");
   }
 
   //Tests logging an info message
   public function testLogWarning()
   {
       Log::setDriver(new FileDriver('Toaster', 'tmp/test.log'));
-      $testData = ['date' => date('Y-m-d H:i:s', time()), 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'level' => 'WARNING', 'test' => 'data', 'me' => 'you'];
+      $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'WARNING', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN',  'test' => 'data', 'me' => 'you'];
       Log::warn(['test' => 'data', 'me' => 'you']);
       $file = fopen('tmp/test.log', 'r');
       $value = fread($file, filesize('tmp/test.log'));
       fclose($file);
       unlink('tmp/test.log');
-      $this->assertJsonStringEqualsJsonString($value, json_encode($testData));
+      $this->assertEquals($value, json_encode($testData) . "\n");
   }
 
   //Tests logging an info message
   public function testLogSuccess()
   {
       Log::setDriver(new FileDriver('Toaster', 'tmp/test.log'));
-      $testData = ['date' => date('Y-m-d H:i:s', time()), 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'level' => 'SUCCESS', 'test' => 'data', 'me' => 'you'];
+      $testData = ['date' => date('Y-m-d H:i:s', time()),'level' => 'SUCCESS', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN',  'test' => 'data', 'me' => 'you'];
       Log::success(['test' => 'data', 'me' => 'you']);
       $file = fopen('tmp/test.log', 'r');
       $value = fread($file, filesize('tmp/test.log'));
       fclose($file);
       unlink('tmp/test.log');
-      $this->assertJsonStringEqualsJsonString($value, json_encode($testData));
+      $this->assertEquals($value, json_encode($testData) . "\n");
   }
 }

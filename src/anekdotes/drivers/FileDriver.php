@@ -39,7 +39,7 @@ class FileDriver implements DriverInterface
   public function __construct($name, $logPath)
   {
       //Set Format to only have message
-      $output = '%message%';
+      $output = "%message%\n";
       $formatter = new LineFormatter($output);
       $handler = new StreamHandler($logPath, MLogger::WARNING);
       $handler->setFormatter($formatter);
