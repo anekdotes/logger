@@ -1,4 +1,4 @@
-# Anekdotes Manager
+# Anekdotes Logger 
 
 [![Latest Stable Version](https://poser.pugx.org/anekdotes/logger/v/stable)](https://packagist.org/packages/anekdotes/logger)
 [![Build Status](https://travis-ci.org/anekdotes/logger.svg?branch=master)](https://travis-ci.org/anekdotes/logger)
