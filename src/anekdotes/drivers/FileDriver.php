@@ -9,7 +9,7 @@
  */
 namespace Anekdotes\Logger\Drivers;
 
-use Monolog\Logger;
+use Monolog\Logger as MLogger;
 
 /**
  * Saves the Log message in a file system
@@ -27,9 +27,12 @@ class FileDriver implements DriverInterface {
 
   /**
    * Instatiates the driver with its Monolog file Logger
-   * @param \Monolog\Logger $logger Monolog File Logger
+   * @param  string  $name     Name of the instantiated MLogger
+   * @param  string  $logPath  Path to where the log file should be saved
    */
-  public function __construct(Logger $logger) {
+  public function __construct($name = "logger", $logPath) {
+    $logger = new MLogger($name);
+    $logger->pushHandler(new StreamHandler($logPath, MLogger::WARNING));
     $this->logger = $logger;
   }
 
