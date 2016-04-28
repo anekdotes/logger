@@ -7,7 +7,7 @@
 [![License](https://poser.pugx.org/anekdotes/logger/license)](https://packagist.org/packages/anekdotes/logger)
 [![Total Downloads](https://poser.pugx.org/anekdotes/logger/downloads)](https://packagist.org/packages/anekdotes/logger)
 
-A library that provides an easy way to upload files to the server simply by using configurations.
+Allows logging of JSON messages, to easily be integrated in a static class.
 
 ## Installation
 
