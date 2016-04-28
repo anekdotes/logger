@@ -11,6 +11,8 @@
 namespace Anekdotes\Logger\Drivers;
 
 use Monolog\Logger as MLogger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Formatter\LineFormatter;
 
 /**
  * Saves the Log message in a file system.
@@ -36,9 +38,16 @@ class FileDriver implements DriverInterface
    */
   public function __construct($name, $logPath)
   {
-      $logger = new MLogger($name);
-      $logger->pushHandler(new StreamHandler($logPath, MLogger::WARNING));
-      $this->logger = $logger;
+    //Set Format to only have message
+    $output = "%message%";
+    $formatter = new LineFormatter($output);
+    $handler = new StreamHandler($logPath, MLogger::WARNING);
+    $handler->setFormatter($formatter);
+    //Create Monolog Logger
+    $logger = new MLogger($name);
+    $logger->pushHandler($handler);
+    //Register Logger
+    $this->logger = $logger;
   }
 
   /**
@@ -49,10 +58,10 @@ class FileDriver implements DriverInterface
    */
   public function write($message, $error = false)
   {
-      if (!$error) {
-          $this->logger->addWarning($message);
-      } else {
-          $this->logger->addError($message);
-      }
+    if (!$error) {
+      $this->logger->addWarning($message);
+    } else {
+      $this->logger->addError($message);
+    }
   }
 }
