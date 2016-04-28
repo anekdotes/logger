@@ -24,7 +24,8 @@
   },
   "autoload": {
     "psr-4": {
-      "Anekdotes\\Logger\\": "src/anekdotes/"
+      "Anekdotes\\Logger\\": "src/anekdotes/",
+      "Anekdotes\\Logger\\Drivers\\": "src/anekdotes/drivers"
     }
   },
   "autoload-dev": {
