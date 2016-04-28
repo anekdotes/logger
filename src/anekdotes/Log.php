@@ -13,45 +13,51 @@ namespace Anekdotes\Logger;
 use Anekdotes\Logger;
 
 /**
- * Static implementation of the Logger
+ * Static implementation of the Logger.
  */
-class Log{
-  /**
+class Log
+{
+    /**
    * The Driver used to write the Log messages.
+   *
    * @var Drivers\DriverInterface
    */
   private static $driver;
 
   /**
-   * Sets the Logger's driver
+   * Sets the Logger's driver.
+   *
    * @param Drivers\DriverInterface  $driver  The driver to set.
    */
-  public static function setDriver($driver) {
-    self::$driver = $driver;
+  public static function setDriver($driver)
+  {
+      self::$driver = $driver;
   }
 
   /**
-   * Obtain the current driver used for logging
+   * Obtain the current driver used for logging.
+   *
    * @return  Drivers\DriverInterface  The driver used for logging
    */
-  public static function getDriver() {
-    return self::$driver;
+  public static function getDriver()
+  {
+      return self::$driver;
   }
 
   /**
-   * Constant representing the level to display in WARN log messages
+   * Constant representing the level to display in WARN log messages.
    */
   const WARN = 'WARNING';
   /**
-   * Constant representing the level to display in INFO log messages
+   * Constant representing the level to display in INFO log messages.
    */
   const INFO = 'INFO';
   /**
-   * Constant representing the level to display in ERROR log messages
+   * Constant representing the level to display in ERROR log messages.
    */
   const ERROR = 'ERROR';
   /**
-   * Constant representing the level to display in SUCCESS log messages
+   * Constant representing the level to display in SUCCESS log messages.
    */
   const SUCCESS = 'SUCCESS';
 
@@ -68,70 +74,73 @@ class Log{
    * @param  mixed           $level    The intensity level of the message. Generally uses the constant levels {WARN, INFO, ERROR, SUCCESS}, but can also be a custom string level.
    * @param  \string[string] $context  An array containing key->value pairs to be stored with the log message.
    */
-  public static function log($level, $context = array()) {
-    if (self::$driver === null) {
-      $driver = new ConsoleDriver();
-    }
-    else{
-      $driver = self::$driver;
-    }
+  public static function log($level, $context = [])
+  {
+      if (self::$driver === null) {
+          $driver = new ConsoleDriver();
+      } else {
+          $driver = self::$driver;
+      }
 
-    $remote_addr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'REMOTE_ADDR_UNKNOWN';
-    $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'REQUEST_URI_UNKNOWN';
+      $remote_addr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'REMOTE_ADDR_UNKNOWN';
+      $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'REQUEST_URI_UNKNOWN';
 
     // Format the date and time
-    $date = date("Y-m-d H:i:s", time());
+    $date = date('Y-m-d H:i:s', time());
 
     // Build message
-    $finalMessage = array("date" => $date,"level" => $level, "remote_addr" => $remote_addr, "request_uri" => $request_uri);
-    if (is_array($context)) {
-      foreach ($context as $key => $value) {
-        $finalMessage[$key] = $value;
+    $finalMessage = ['date' => $date, 'level' => $level, 'remote_addr' => $remote_addr, 'request_uri' => $request_uri];
+      if (is_array($context)) {
+          foreach ($context as $key => $value) {
+              $finalMessage[$key] = $value;
+          }
       }
-    }
-    $finalMessage = json_encode($finalMessage);
+      $finalMessage = json_encode($finalMessage);
 
-    self::$driver->write($finalMessage, $level == self::ERROR);
+      self::$driver->write($finalMessage, $level == self::ERROR);
   }
 
   /**
-   * Write an error log message
+   * Write an error log message.
    *
    * @param  string          $message  Contains the basic message included in the log.
    * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message.
    */
-  public static function error($context = array()) {
-    self::log(self::ERROR, $context);
+  public static function error($context = [])
+  {
+      self::log(self::ERROR, $context);
   }
 
   /**
-   * Write a warning log message
+   * Write a warning log message.
    *
    * @param  string          $message  Contains the basic message included in the log.
    * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message.
    */
-  public static function warn($context = array()) {
-    self::log(self::WARN, $context);
+  public static function warn($context = [])
+  {
+      self::log(self::WARN, $context);
   }
 
   /**
-   * Write an info log message
+   * Write an info log message.
    *
    * @param  string          $message  Contains the basic message included in the log.
    * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message.
    */
-  public static function info($context = array()) {
-    self::log(self::INFO, $context);
+  public static function info($context = [])
+  {
+      self::log(self::INFO, $context);
   }
 
   /**
-   * Write a success log message
+   * Write a success log message.
    *
    * @param  string          $message  Contains the basic message included in the log.
    * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message.
    */
-  public static function success($context = array()) {
-    self::log(self::SUCCESS, $context);
+  public static function success($context = [])
+  {
+      self::log(self::SUCCESS, $context);
   }
-
 }
