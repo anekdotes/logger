@@ -10,20 +10,15 @@
 namespace Anekdotes\Logger\Drivers;
 
 /**
- * Interface that outputs log messages in a CLI (console line Interface)
+ * Interface to be used by all Logging Drivers. Allows the logger to write its message in the desired driver.
  */
-class ConsoleDriver implements DriverInterface {
+interface DriverInterface {
 
   /**
    * Function that writes the log message.
-   * Writes the message in the console
-   * @param  string   $message  Message that needs to be output in the console
+   * @param  string   $message  Message that needs to be output
    * @param  boolean  $error    If the log message is considered an error, for logging purposes
    */
-  public function write($message, $error = false) {
-    $stream = fopen('php://' . ($error ? 'stderr' : 'stdout'), 'a');
-    fwrite($stream, $message);
-    fclose($stream);
-  }
+  public function write($message, $error = false);
 
 }

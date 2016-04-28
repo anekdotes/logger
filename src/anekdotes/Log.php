@@ -10,7 +10,7 @@
 
 namespace Anekdotes\Logger;
 
-use Anekdotes\Logger\Logger;
+use Anekdotes\Logger;
 
 /**
  * Static implementation of the Logger
@@ -70,7 +70,7 @@ class Log{
    */
   public static function log($level, $context = array()) {
     if (self::$driver === null) {
-      $driver = new ConsoleDriver;
+      $driver = new ConsoleDriver();
     }
     else{
       $driver = self::$driver;
@@ -83,7 +83,7 @@ class Log{
     $date = date("Y-m-d H:i:s", time());
 
     // Build message
-    $finalMessage = array("date" => $date,"level" => $level, "remote_addr" => $remote_addr, "request_uri" => $request_uri);
+    $finalMessage = array("date" => $date,"level" => $level, "remote_addr" => $remote_addr, "request_uri" => $request_uri);
     if (is_array($context)) {
       foreach ($context as $key => $value) {
         $finalMessage[$key] = $value;

@@ -12,9 +12,15 @@
 namespace Tests;
 
 use Anekdotes\Logger\Log;
+use Anekdotes\Logger\Drivers\ConsoleDriver;
 use PHPUnit_Framework_TestCase;
 
 class LogTest extends PHPUnit_Framework_TestCase
 {
-  
+  //Tests the instantion of Drivers
+  public function testSetAndGetDriver(){
+    $conDriver = new ConsoleDriver();
+    Log::setDriver($conDriver);
+    $this->assertEquals($conDriver,Log::getDriver());
+  }
 }
