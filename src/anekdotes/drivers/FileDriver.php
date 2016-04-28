@@ -39,15 +39,15 @@ class FileDriver implements DriverInterface
   public function __construct($name, $logPath)
   {
       //Set Format to only have message
-    $output = '%message%';
+      $output = '%message%';
       $formatter = new LineFormatter($output);
       $handler = new StreamHandler($logPath, MLogger::WARNING);
       $handler->setFormatter($formatter);
-    //Create Monolog Logger
-    $logger = new MLogger($name);
+      //Create Monolog Logger
+      $logger = new MLogger($name);
       $logger->pushHandler($handler);
-    //Register Logger
-    $this->logger = $logger;
+      //Register Logger
+      $this->logger = $logger;
   }
 
   /**

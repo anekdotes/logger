@@ -95,7 +95,7 @@ class Log
               $finalMessage[$key] = $value;
           }
       }
-      $finalMessage = json_encode($finalMessage);
+      $finalMessage = json_encode($finalMessage) . "\n";
 
       self::$driver->write($finalMessage, $level == self::ERROR);
   }
