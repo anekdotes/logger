@@ -50,13 +50,13 @@ class LogTest extends PHPUnit_Framework_TestCase
       $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'ERROR', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN',  'test' => 'data', 'me' => 'you'];
       //Setup Error Handler
       $toaster = 'Not Result';
-      Log::setErrorHandler(function () use (&$toaster) {
-        $toaster = 'Result';
+      Log::setErrorHandler(function($data) use (&$toaster) {
+        $toaster = $data;
       });
       //Run Function
       Log::error(['test' => 'data', 'me' => 'you']);
       //Test Error Handler
-      $this->assertEquals($toaster, 'Result');
+      $this->assertEquals($toaster, json_encode($testData));
       //Test Logging
       $file = fopen('tmp/test.log', 'r');
       $value = fread($file, filesize('tmp/test.log'));

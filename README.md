@@ -55,8 +55,12 @@ You can use handlers to have the logger run additional tasks on error and critic
     Log::setErrorHandler($functionThatLogsIntoDatabase);
     Log::error($data);
 
+The handlers can also use the data that will be provided to the logfile and send it to the Closure.
+
+    $data = ["data" => data];
+    $functionThatLogsIntoDatabase = function ($LogData) { //Log $LogData in the DB. Note the LogData is the exact output that will be saved to a file. It is in JSON Format. }
     Log::setCriticalHandler($functionThatLogsIntoDatabase);
-    Log::crirical($data);
+    Log::critical($data);
 
 ## Logging Levels
 
