@@ -119,7 +119,7 @@ class Log
       } else {
           $driver = self::$driver;
       }
-      $finalMessage = self::addLoggingData($context,$level);
+      $finalMessage = self::addLoggingData($context, $level);
 
       self::$driver->write($finalMessage, $level == self::ERROR);
   }
@@ -133,7 +133,7 @@ class Log
   {
       self::log(self::ERROR, $context);
       if (self::$OnErrorHandler instanceof \Closure) {
-          call_user_func(self::$OnErrorHandler,self::addLoggingData($context,self::ERROR));
+          call_user_func(self::$OnErrorHandler, self::addLoggingData($context, self::ERROR));
       }
   }
 
@@ -176,29 +176,32 @@ class Log
   {
       self::log(self::CRITICAL, $context);
       if (self::$OnCriticalHandler instanceof \Closure) {
-          call_user_func(self::$OnCriticalHandler,self::addLoggingData($context,self::CRITICAL));
+          call_user_func(self::$OnCriticalHandler, self::addLoggingData($context, self::CRITICAL));
       }
   }
 
   /**
-   * Merges the received context array with additionnal logging Data
+   * Merges the received context array with additionnal logging Data.
    *
    * @param   \string[string]  $context  An array containing key->value pairs to be merged
    * @param  mixed           $level    The intensity level of the message. Generally uses the constant levels {WARN, INFO, ERROR, SUCCESS}, but can also be a custom string level.
+   *
    * @return  \string[string]            An array containing the context array and additional logging data
    */
-  private static function addLoggingData($context = [],$level){
-    $remote_addr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'REMOTE_ADDR_UNKNOWN';
-    $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'REQUEST_URI_UNKNOWN';
+  private static function addLoggingData($context, $level)
+  {
+      $remote_addr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'REMOTE_ADDR_UNKNOWN';
+      $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'REQUEST_URI_UNKNOWN';
 
     // Format the date and time
     $date = date('Y-m-d H:i:s', time());
 
     // Build message
     $finalMessage = ['date' => $date, 'level' => $level, 'remote_addr' => $remote_addr, 'request_uri' => $request_uri];
-    if (is_array($context)) {
-        $finalMessage = array_merge($finalMessage,$context);
-    }
-    return json_encode($finalMessage);
+      if (is_array($context)) {
+          $finalMessage = array_merge($finalMessage, $context);
+      }
+
+      return json_encode($finalMessage);
   }
 }
