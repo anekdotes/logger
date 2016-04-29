@@ -77,4 +77,17 @@ class LogTest extends PHPUnit_Framework_TestCase
       unlink('tmp/test.log');
       $this->assertEquals($value, json_encode($testData)."\n");
   }
+
+  //Tests logging a critical message
+  public function testLogCritical()
+  {
+      Log::setDriver(new FileDriver('Toaster', 'tmp/test.log'));
+      $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'CRITICAL', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN',  'test' => 'data', 'me' => 'you'];
+      Log::critical(['test' => 'data', 'me' => 'you']);
+      $file = fopen('tmp/test.log', 'r');
+      $value = fread($file, filesize('tmp/test.log'));
+      fclose($file);
+      unlink('tmp/test.log');
+      $this->assertEquals($value, json_encode($testData)."\n");
+  }
 }

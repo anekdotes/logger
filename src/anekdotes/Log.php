@@ -17,12 +17,14 @@ use Anekdotes\Logger;
  */
 class Log
 {
-    /**
+  /**
    * The Driver used to write the Log messages.
    *
    * @var Drivers\DriverInterface
    */
   private static $driver;
+
+
 
   /**
    * Sets the Logger's driver.
@@ -44,6 +46,8 @@ class Log
       return self::$driver;
   }
 
+
+
   /**
    * Constant representing the level to display in WARN log messages.
    */
@@ -60,6 +64,10 @@ class Log
    * Constant representing the level to display in SUCCESS log messages.
    */
   const SUCCESS = 'SUCCESS';
+  /**
+   * Constant representing the level to display in CRITICAL log messages.
+   */
+  const CRITICAL = 'CRITICAL';
 
   /**
    * Generic function to write and store a basic log message.
@@ -114,7 +122,7 @@ class Log
   /**
    * Write a warning log message.
    *
-   * @param  string          $message  Contains the basic message included in the log.
+   * @param  string           $message  Contains the basic message included in the log.
    * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message.
    */
   public static function warn($context = [])
@@ -125,7 +133,7 @@ class Log
   /**
    * Write an info log message.
    *
-   * @param  string          $message  Contains the basic message included in the log.
+   * @param  string           $message  Contains the basic message included in the log.
    * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message.
    */
   public static function info($context = [])
@@ -136,11 +144,22 @@ class Log
   /**
    * Write a success log message.
    *
-   * @param  string          $message  Contains the basic message included in the log.
+   * @param  string           $message  Contains the basic message included in the log.
    * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message.
    */
   public static function success($context = [])
   {
       self::log(self::SUCCESS, $context);
+  }
+
+  /**
+   * Write a critical log message.
+   *
+   * @param  string           $message  Contains the basic message included in the log.
+   * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message.
+   */
+  public static function critical($context = [])
+  {
+      self::log(self::CRITICAL, $context);
   }
 }
