@@ -50,7 +50,7 @@ class LogTest extends PHPUnit_Framework_TestCase
       $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'ERROR', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN',  'test' => 'data', 'me' => 'you'];
       //Setup Error Handler
       $toaster = 'Not Result';
-      Log::setErrorHandler(function($data) use (&$toaster) {
+      Log::setErrorHandler(function ($data) use (&$toaster) {
         $toaster = $data;
       });
       //Run Function
@@ -124,6 +124,6 @@ class LogTest extends PHPUnit_Framework_TestCase
   //Note : As it is impossible to retrieve data from the stdout/stderr console, the only thins tested here is that the code does not crash. This does not test the actual behavior
   public function testConsoleDriver()
   {
-    Log::error([]);
+      Log::error([]);
   }
 }
