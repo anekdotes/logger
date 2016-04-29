@@ -20,7 +20,7 @@ Install via composer into your project:
 To use the logger, call its namespace and build a context array.
 
     use Anekdotes\Logger\Log;
-    Log::info(array("message" => "toaster","user_identification" => "4N3K");
+    Log::info(["message" => "toaster","user_identification" => "4N3K"];
 
 ## Logging Drivers
 
@@ -34,7 +34,7 @@ To log to files, a FileDriver must be set.
     use Anekdotes\Logger\Drivers\FileDriver;
     //Set Driver and use it
     Log::setDriver(new FileDriver('logname','tmp/logs/toaster.log');
-    Log::info(array("message" => "toaster","user_identification" => "4N3K");
+    Log::info(["message" => "toaster","user_identification" => "4N3K"];
 
 ### Console Driver
 
@@ -44,5 +44,27 @@ Logs a file to the PHP Console. Used by default, but this can be used if another
     use Anekdotes\Logger\Drivers\FileDriver;
     //Set Driver and use it
     Log::setDriver(new ConsoleDriver()); 
-    Log::info(array("message" => "toaster","user_identification" => "4N3K");
+    Log::info(["message" => "toaster","user_identification" => "4N3K"];
+
+## Handlers
+
+You can use handlers to have the logger run additional tasks on error and critical logs. Handlers are Anonymous functions that are set by using their accessors. 
+
+    $data = ["data" => data];
+    $functionThatLogsIntoDatabase = function () use ($data) { //Log $data in the database };
+    Log::setErrorHandler($functionThatLogsIntoDatabase);
+    Log::error($data);
+
+    Log::setCriticalHandler($functionThatLogsIntoDatabase);
+    Log::crirical($data);
+
+## Logging Levels
+
+You can use the following levels of logging as calls:
+
+    Log::info([]);
+    Log::success([]);
+    Log::warn([]);
+    Log::error([]);
+    Log::critical([]);
 
