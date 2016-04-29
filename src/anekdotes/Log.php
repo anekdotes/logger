@@ -147,7 +147,7 @@ class Log
   {
       self::log(self::ERROR, $context);
       if(self::$OnErrorHandler InstanceOf \Closure){
-        self::$OnErrorHandler();
+        call_user_func(self::$OnErrorHandler);
       }
   }
 
@@ -194,7 +194,7 @@ class Log
   {
       self::log(self::CRITICAL, $context);
       if(self::$OnCriticalHandler InstanceOf \Closure){
-        self::$OnCriticalHandler();
+        call_user_func(self::$OnCriticalHandler);
       }
   }
 }
