@@ -25,6 +25,19 @@ class Log
   private static $driver;
 
 
+  /**
+   * Contains a function to be called on Error messages
+   *
+   * @var \Closure
+   */
+  private static $OnErrorHandler;
+
+  /**
+   * Contains a function to be called on Critical messages
+   *
+   * @var \Closure
+   */
+  private static $OnCriticalHandler;
 
   /**
    * Sets the Logger's driver.
@@ -46,7 +59,23 @@ class Log
       return self::$driver;
   }
 
+  /**
+   * Set the function to be executed when an error message is logged
+   *
+   * @param  \Closure  $handler  Function to be set
+   */
+  public static function setErrorHandler($handler){
+    self::$OnErrorHandler = $handler;
+  }
 
+  /**
+   * Set the function to be executed when a critical message is logged
+   *
+   * @param  \Closure  $handler  Function to be set
+   */
+  public static function setCriticalHandler($handler){
+    self::$OnCriticalHandler = $handler;
+  }
 
   /**
    * Constant representing the level to display in WARN log messages.
@@ -117,6 +146,9 @@ class Log
   public static function error($context = [])
   {
       self::log(self::ERROR, $context);
+      if(self::$OnErrorHandler InstanceOf \Closure){
+        self::$OnErrorHandler();
+      }
   }
 
   /**
@@ -161,5 +193,8 @@ class Log
   public static function critical($context = [])
   {
       self::log(self::CRITICAL, $context);
+      if(self::$OnCriticalHandler InstanceOf \Closure){
+        self::$OnCriticalHandler();
+      }
   }
 }
