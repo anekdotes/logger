@@ -17,23 +17,22 @@ use Anekdotes\Logger;
  */
 class Log
 {
-  /**
+    /**
    * The Driver used to write the Log messages.
    *
    * @var Drivers\DriverInterface
    */
   private static $driver;
 
-
   /**
-   * Contains a function to be called on Error messages
+   * Contains a function to be called on Error messages.
    *
    * @var \Closure
    */
   private static $OnErrorHandler;
 
   /**
-   * Contains a function to be called on Critical messages
+   * Contains a function to be called on Critical messages.
    *
    * @var \Closure
    */
@@ -60,21 +59,23 @@ class Log
   }
 
   /**
-   * Set the function to be executed when an error message is logged
+   * Set the function to be executed when an error message is logged.
    *
    * @param  \Closure  $handler  Function to be set
    */
-  public static function setErrorHandler($handler){
-    self::$OnErrorHandler = $handler;
+  public static function setErrorHandler($handler)
+  {
+      self::$OnErrorHandler = $handler;
   }
 
   /**
-   * Set the function to be executed when a critical message is logged
+   * Set the function to be executed when a critical message is logged.
    *
    * @param  \Closure  $handler  Function to be set
    */
-  public static function setCriticalHandler($handler){
-    self::$OnCriticalHandler = $handler;
+  public static function setCriticalHandler($handler)
+  {
+      self::$OnCriticalHandler = $handler;
   }
 
   /**
@@ -146,8 +147,8 @@ class Log
   public static function error($context = [])
   {
       self::log(self::ERROR, $context);
-      if(self::$OnErrorHandler InstanceOf \Closure){
-        call_user_func(self::$OnErrorHandler);
+      if (self::$OnErrorHandler instanceof \Closure) {
+          call_user_func(self::$OnErrorHandler);
       }
   }
 
@@ -193,8 +194,8 @@ class Log
   public static function critical($context = [])
   {
       self::log(self::CRITICAL, $context);
-      if(self::$OnCriticalHandler InstanceOf \Closure){
-        call_user_func(self::$OnCriticalHandler);
+      if (self::$OnCriticalHandler instanceof \Closure) {
+          call_user_func(self::$OnCriticalHandler);
       }
   }
 }

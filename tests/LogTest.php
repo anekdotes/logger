@@ -49,14 +49,14 @@ class LogTest extends PHPUnit_Framework_TestCase
       Log::setDriver(new FileDriver('Toaster', 'tmp/test.log'));
       $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'ERROR', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN',  'test' => 'data', 'me' => 'you'];
       //Setup Error Handler
-      $toaster = "Not Result";
-      Log::setErrorHandler(function() use (&$toaster){
-        $toaster = "Result";
+      $toaster = 'Not Result';
+      Log::setErrorHandler(function () use (&$toaster) {
+        $toaster = 'Result';
       });
       //Run Function
       Log::error(['test' => 'data', 'me' => 'you']);
       //Test Error Handler
-      $this->assertEquals($toaster, "Result");
+      $this->assertEquals($toaster, 'Result');
       //Test Logging
       $file = fopen('tmp/test.log', 'r');
       $value = fread($file, filesize('tmp/test.log'));
@@ -104,14 +104,14 @@ class LogTest extends PHPUnit_Framework_TestCase
       Log::setDriver(new FileDriver('Toaster', 'tmp/test.log'));
       $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'CRITICAL', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN',  'test' => 'data', 'me' => 'you'];
       //Setup Critical Handler
-      $toaster = "Not Result";
-      Log::setCriticalHandler(function() use (&$toaster){
-        $toaster = "Result";
+      $toaster = 'Not Result';
+      Log::setCriticalHandler(function () use (&$toaster) {
+        $toaster = 'Result';
       });
       //Run Function
       Log::critical(['test' => 'data', 'me' => 'you']);
       //Test Critical Handler
-      $this->assertEquals($toaster, "Result");
+      $this->assertEquals($toaster, 'Result');
       //Test Logging
       $file = fopen('tmp/test.log', 'r');
       $value = fread($file, filesize('tmp/test.log'));
