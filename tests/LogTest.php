@@ -119,4 +119,11 @@ class LogTest extends PHPUnit_Framework_TestCase
       unlink('tmp/test.log');
       $this->assertEquals($value, json_encode($testData)."\n");
   }
+
+  //Test Console Driver (Which is default driver)
+  //Note : As it is impossible to retrieve data from the stdout/stderr console, the only thins tested here is that the code does not crash. This does not test the actual behavior
+  public function testConsoleDriver()
+  {
+    Log::error([]);
+  }
 }
