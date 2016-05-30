@@ -29,14 +29,14 @@ class Log
    *
    * @var \Closure
    */
-  private static $OnErrorHandler;
+  private static $onErrorHandler;
 
   /**
    * Contains a function to be called on Critical messages.
    *
    * @var \Closure
    */
-  private static $OnCriticalHandler;
+  private static $onCriticalHandler;
 
   /**
    * Sets the Logger's driver.
@@ -65,7 +65,7 @@ class Log
    */
   public static function setErrorHandler($handler)
   {
-      self::$OnErrorHandler = $handler;
+      self::$onErrorHandler = $handler;
   }
 
   /**
@@ -75,7 +75,7 @@ class Log
    */
   public static function setCriticalHandler($handler)
   {
-      self::$OnCriticalHandler = $handler;
+      self::$onCriticalHandler = $handler;
   }
 
   /**
@@ -132,8 +132,8 @@ class Log
   public static function error($context = [])
   {
       self::log(self::ERROR, $context);
-      if (self::$OnErrorHandler instanceof \Closure) {
-          call_user_func(self::$OnErrorHandler, self::addLoggingData($context, self::ERROR));
+      if (self::$onErrorHandler instanceof \Closure) {
+          call_user_func(self::$onErrorHandler, self::addLoggingData($context, self::ERROR));
       }
   }
 
@@ -175,8 +175,8 @@ class Log
   public static function critical($context = [])
   {
       self::log(self::CRITICAL, $context);
-      if (self::$OnCriticalHandler instanceof \Closure) {
-          call_user_func(self::$OnCriticalHandler, self::addLoggingData($context, self::CRITICAL));
+      if (self::$onCriticalHandler instanceof \Closure) {
+          call_user_func(self::$onCriticalHandler, self::addLoggingData($context, self::CRITICAL));
       }
   }
 
@@ -190,14 +190,14 @@ class Log
    */
   private static function addLoggingData($context, $level)
   {
-      $remote_addr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'REMOTE_ADDR_UNKNOWN';
-      $request_uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'REQUEST_URI_UNKNOWN';
+      $remoteAddr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'REMOTE_ADDR_UNKNOWN';
+      $requestUri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'REQUEST_URI_UNKNOWN';
 
-    // Format the date and time
-    $date = date('Y-m-d H:i:s', time());
+      // Format the date and time
+      $date = date('Y-m-d H:i:s', time());
 
-    // Build message
-    $finalMessage = ['date' => $date, 'level' => $level, 'remote_addr' => $remote_addr, 'request_uri' => $request_uri];
+      // Build message
+      $finalMessage = ['date' => $date, 'level' => $level, 'remote_addr' => $remoteAddr, 'request_uri' => $requestUri];
       if (is_array($context)) {
           $finalMessage = array_merge($finalMessage, $context);
       }
