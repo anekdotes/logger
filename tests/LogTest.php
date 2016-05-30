@@ -51,7 +51,7 @@ class LogTest extends PHPUnit_Framework_TestCase
       //Setup Error Handler
       $toaster = 'Not Result';
       Log::setErrorHandler(function ($data) use (&$toaster) {
-        $toaster = $data;
+          $toaster = $data;
       });
       //Run Function
       Log::error(['test' => 'data', 'me' => 'you']);
@@ -106,7 +106,7 @@ class LogTest extends PHPUnit_Framework_TestCase
       //Setup Critical Handler
       $toaster = 'Not Result';
       Log::setCriticalHandler(function () use (&$toaster) {
-        $toaster = 'Result';
+          $toaster = 'Result';
       });
       //Run Function
       Log::critical(['test' => 'data', 'me' => 'you']);
