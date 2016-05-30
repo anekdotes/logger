@@ -6,6 +6,7 @@
 [![StyleCI](https://styleci.io/repos/57247052/shield?style=flat)](https://styleci.io/repos/57247052)
 [![License](https://poser.pugx.org/anekdotes/logger/license)](https://packagist.org/packages/anekdotes/logger)
 [![Total Downloads](https://poser.pugx.org/anekdotes/logger/downloads)](https://packagist.org/packages/anekdotes/logger)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/63e2ec38eec4436fa92030393ede8a6b)](https://www.codacy.com/app/steve-gagnev4si/logger?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=anekdotes/logger&amp;utm_campaign=Badge_Grade)
 
 Allows logging of JSON messages, to easily be integrated in a static class.
 
