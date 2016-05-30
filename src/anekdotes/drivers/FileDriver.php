@@ -60,8 +60,9 @@ class FileDriver implements DriverInterface
   {
       if (!$error) {
           $this->logger->addWarning($message);
+
           return;
       }
-      $this->logger->addError($message);  
+      $this->logger->addError($message);
   }
 }

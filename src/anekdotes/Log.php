@@ -115,7 +115,7 @@ class Log
   public static function log($level, $context = [])
   {
       $driver = self::$driver === null ? new ConsoleDriver() : self::$driver;
-      
+
       $finalMessage = self::addLoggingData($context, $level);
 
       self::$driver->write($finalMessage, $level == self::ERROR);
