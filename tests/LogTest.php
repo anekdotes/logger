@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Tests;
+namespace tests;
 
 use Anekdotes\Logger\Drivers\ConsoleDriver;
 use Anekdotes\Logger\Drivers\FileDriver;

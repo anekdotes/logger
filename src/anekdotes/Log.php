@@ -41,7 +41,7 @@ class Log
   /**
    * Sets the Logger's driver.
    *
-   * @param Drivers\DriverInterface  $driver  The driver to set.
+   * @param Drivers\DriverInterface  $driver  The driver to set
    */
   public static function setDriver($driver)
   {
@@ -108,9 +108,9 @@ class Log
    *
    * [2016-03-28 10:13:36] sitebase.WARNING: 2016-03-28 10:13:36 | INFO | 127.0.0.1 	/url : Toaster 		nb_toasts	=> 2  [] []
    *
-   * @param  string          $message  Contains the basic message included in the log.
-   * @param  mixed           $level    The intensity level of the message. Generally uses the constant levels {WARN, INFO, ERROR, SUCCESS}, but can also be a custom string level.
-   * @param  \string[string] $context  An array containing key->value pairs to be stored with the log message.
+   * @param  string          $message  Contains the basic message included in the log
+   * @param  mixed           $level    The intensity level of the message. Generally uses the constant levels {WARN, INFO, ERROR, SUCCESS}, but can also be a custom string level
+   * @param  \string[string] $context  An array containing key->value pairs to be stored with the log message
    */
   public static function log($level, $context = [])
   {
@@ -122,11 +122,12 @@ class Log
   /**
    * Write an error log message.
    *
-   * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message.
+   * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message
    */
   public static function error($context = [])
   {
       self::log(self::ERROR, $context);
+
       if (self::$onErrorHandler instanceof \Closure) {
           call_user_func(self::$onErrorHandler, self::addLoggingData($context, self::ERROR));
       }
@@ -135,7 +136,7 @@ class Log
   /**
    * Write a warning log message.
    *
-   * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message.
+   * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message
    */
   public static function warn($context = [])
   {
@@ -145,7 +146,7 @@ class Log
   /**
    * Write an info log message.
    *
-   * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message.
+   * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message
    */
   public static function info($context = [])
   {
@@ -155,7 +156,7 @@ class Log
   /**
    * Write a success log message.
    *
-   * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message.
+   * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message
    */
   public static function success($context = [])
   {
@@ -165,11 +166,12 @@ class Log
   /**
    * Write a critical log message.
    *
-   * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message.
+   * @param  \string[string]  $context  An array containing key->value pairs to be stored with the log message
    */
   public static function critical($context = [])
   {
       self::log(self::CRITICAL, $context);
+
       if (self::$onCriticalHandler instanceof \Closure) {
           call_user_func(self::$onCriticalHandler, self::addLoggingData($context, self::CRITICAL));
       }
@@ -179,12 +181,16 @@ class Log
    * Merges the received context array with additionnal logging Data.
    *
    * @param   \string[string]  $context  An array containing key->value pairs to be merged
-   * @param  mixed           $level    The intensity level of the message. Generally uses the constant levels {WARN, INFO, ERROR, SUCCESS}, but can also be a custom string level.
+   * @param  mixed           $level    The intensity level of the message. Generally uses the constant levels {WARN, INFO, ERROR, SUCCESS}, but can also be a custom string level
    *
    * @return  \string[string]            An array containing the context array and additional logging data
    */
   private static function addLoggingData($context, $level)
   {
+      if (!is_array($context)) {
+          $context = (array) $context;
+      }
+
       $remoteAddr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'REMOTE_ADDR_UNKNOWN';
       $requestUri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'REQUEST_URI_UNKNOWN';
 
@@ -193,6 +199,7 @@ class Log
 
       // Build message
       $finalMessage = ['date' => $date, 'level' => $level, 'remote_addr' => $remoteAddr, 'request_uri' => $requestUri];
+
       if (is_array($context)) {
           $finalMessage = array_merge($finalMessage, $context);
       }

@@ -1,5 +1,6 @@
 {
   "name": "anekdotes/logger",
+  "version": "0.3.1",
   "type": "library",
   "description": "A logger class to log JSON messages",
   "keywords": [
