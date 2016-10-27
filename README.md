@@ -59,7 +59,9 @@ You can use handlers to have the logger run additional tasks on error and critic
 
 ```php
     $data = ["data" => "data"];
-    $functionThatLogsIntoDatabase = function () use ($data) { //Log $data in the database };
+    $functionThatLogsIntoDatabase = function () use ($data) { 
+      //Log $data in the database 
+    };
     Log::setErrorHandler($functionThatLogsIntoDatabase);
     Log::error($data);
 ```
@@ -68,7 +70,9 @@ The handlers can also use the data that will be provided to the logfile and send
 
 ```php
     $data = ["data" => "data"];
-    $functionThatLogsIntoDatabase = function ($LogData) { //Log $LogData in the DB. Note the LogData is the exact output that will be saved to a file. It is in JSON Format. }
+    $functionThatLogsIntoDatabase = function ($LogData) {
+      //Log $LogData in the DB. Note the LogData is the exact output that will be saved to a file. It is in JSON Format. 
+    };
     Log::setCriticalHandler($functionThatLogsIntoDatabase);
     Log::critical($data);
 ```
