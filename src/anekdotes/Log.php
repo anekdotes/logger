@@ -192,6 +192,7 @@ class Log
       }
 
       $userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'HTTP_USER_AGENT_UNKNOWN';
+      $isBot = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider|mediapartners/i', $_SERVER['HTTP_USER_AGENT']) ? 'YES' : 'NO';
       $remoteAddr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : 'REMOTE_ADDR_UNKNOWN';
       $requestUri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : 'REQUEST_URI_UNKNOWN';
 
@@ -199,7 +200,7 @@ class Log
       $date = date('Y-m-d H:i:s', time());
 
       // Build message
-      $finalMessage = ['date' => $date, 'level' => $level, 'remote_addr' => $remoteAddr, 'request_uri' => $requestUri, 'user_agent' => $userAgent];
+      $finalMessage = ['date' => $date, 'level' => $level, 'remote_addr' => $remoteAddr, 'request_uri' => $requestUri, 'user_agent' => $userAgent, 'IS_BOT' => $isBot];
 
       if (is_array($context)) {
           $finalMessage = array_merge($finalMessage, $context);
