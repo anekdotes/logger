@@ -41,7 +41,7 @@ class LogTest extends PHPUnit_Framework_TestCase
     {
         //Setup Data
         Log::setDriver(new FileDriver('Toaster', 'tmp/test.log'));
-        $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'INFO',  'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'user_agent' => 'HTTP_USER_AGENT_UNKNOWN', 'IS_BOT' => 'NO','test' => 'data', 'me' => 'you'];
+        $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'INFO',  'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'user_agent' => 'HTTP_USER_AGENT_UNKNOWN', 'IS_BOT' => 'NO', "gets" => "", "posts" => "", 'test' => 'data', 'me' => 'you'];
         //Run Function
         Log::info(['test' => 'data', 'me' => 'you']);
         //Test Logging
@@ -57,7 +57,7 @@ class LogTest extends PHPUnit_Framework_TestCase
     {
         //Setup Data
         Log::setDriver(new FileDriver('Toaster', 'tmp/test.log'));
-        $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'ERROR', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'user_agent' => 'HTTP_USER_AGENT_UNKNOWN', 'IS_BOT' => 'NO', 'test' => 'data', 'me' => 'you'];
+        $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'ERROR', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'user_agent' => 'HTTP_USER_AGENT_UNKNOWN', 'IS_BOT' => 'NO', "gets" => "", "posts" => "", 'test' => 'data', 'me' => 'you'];
         //Setup Error Handler
         $toaster = 'Not Result';
         Log::setErrorHandler(function ($data) use (&$toaster) {
@@ -80,7 +80,7 @@ class LogTest extends PHPUnit_Framework_TestCase
     {
         //Setup Data
         Log::setDriver(new FileDriver('Toaster', 'tmp/test.log'));
-        $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'WARNING', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'user_agent' => 'HTTP_USER_AGENT_UNKNOWN', 'IS_BOT' => 'NO', 'test' => 'data', 'me' => 'you'];
+        $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'WARNING', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'user_agent' => 'HTTP_USER_AGENT_UNKNOWN', 'IS_BOT' => 'NO', "gets" => "", "posts" => "", 'test' => 'data', 'me' => 'you'];
         //Run Function
         Log::warn(['test' => 'data', 'me' => 'you']);
         //Test Logging
@@ -96,7 +96,7 @@ class LogTest extends PHPUnit_Framework_TestCase
     {
         //Setup Data
         Log::setDriver(new FileDriver('Toaster', 'tmp/test.log'));
-        $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'SUCCESS', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'user_agent' => 'HTTP_USER_AGENT_UNKNOWN', 'IS_BOT' => 'NO', 'test' => 'data', 'me' => 'you'];
+        $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'SUCCESS', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'user_agent' => 'HTTP_USER_AGENT_UNKNOWN', 'IS_BOT' => 'NO', "gets" => "", "posts" => "", 'test' => 'data', 'me' => 'you'];
         //Run Function
         Log::success(['test' => 'data', 'me' => 'you']);
         //Test Logging
@@ -112,7 +112,7 @@ class LogTest extends PHPUnit_Framework_TestCase
     {
         //Setup Data
         Log::setDriver(new FileDriver('Toaster', 'tmp/test.log'));
-        $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'CRITICAL', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'user_agent' => 'HTTP_USER_AGENT_UNKNOWN', 'IS_BOT' => 'NO', 'test' => 'data', 'me' => 'you'];
+        $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'CRITICAL', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'user_agent' => 'HTTP_USER_AGENT_UNKNOWN', 'IS_BOT' => 'NO', "gets" => "", "posts" => "", 'test' => 'data', 'me' => 'you'];
         //Setup Critical Handler
         $toaster = 'Not Result';
         Log::setCriticalHandler(function () use (&$toaster) {
@@ -141,7 +141,7 @@ class LogTest extends PHPUnit_Framework_TestCase
     {
         //Setup Data
         Log::setDriver(new FileDriver('Toaster', 'tmp/test.log'));
-        $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'CRITICAL', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'user_agent' => 'HTTP_USER_AGENT_UNKNOWN', 'IS_BOT' => 'NO', 'test' => 'data', 'me' => 'you'];
+        $testData = ['date' => date('Y-m-d H:i:s', time()), 'level' => 'CRITICAL', 'remote_addr' => 'REMOTE_ADDR_UNKNOWN', 'request_uri' => 'REQUEST_URI_UNKNOWN', 'user_agent' => 'HTTP_USER_AGENT_UNKNOWN', 'IS_BOT' => 'NO', "gets" => "", "posts" => "", 'test' => 'data', 'me' => 'you'];
         //Run Function
         Log::critical(['test' => 'data', 'me' => 'you']);
         //Test Logging
