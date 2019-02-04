@@ -202,6 +202,10 @@ class Log
         $temp = [];
 
         foreach ($_GET as $key => $value) {
+          if (is_array($value)) {
+            $value = implode(',', $value);
+          }
+          
           $temp[] = $key . '=' . $value;
         }
 
@@ -212,6 +216,10 @@ class Log
         $temp = [];
 
         foreach ($_POST as $key => $value) {
+          if (is_array($value)) {
+            $value = implode(',', $value);
+          }
+
           $temp[] = $key . '=' . $value;
         }
 
