@@ -1,6 +1,6 @@
 {
   "name": "anekdotes/logger",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "type": "library",
   "description": "A logger class to log JSON messages",
   "keywords": [
@@ -19,7 +19,6 @@
   "require": {
     "php": ">=5.3.0",
     "monolog/monolog": "~1.10",
-    "codacy/coverage": "^1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0|~5.0"
