@@ -41,11 +41,14 @@ class FileDriver implements DriverInterface
       //Set Format to only have message
       $output = "%message%\n";
       $formatter = new LineFormatter($output);
-      $handler = new StreamHandler($logPath, MLogger::WARNING);
-      $handler->setFormatter($formatter);
-      //Create Monolog Logger
+
+      // Create a handler
+      $stream = new StreamHandler($logPath, MLogger::WARNING);
+      $stream->setFormatter($formatter);
+
       $logger = new MLogger($name);
-      $logger->pushHandler($handler);
+      $logger->pushHandler($stream);
+
       //Register Logger
       $this->logger = $logger;
   }
@@ -59,10 +62,10 @@ class FileDriver implements DriverInterface
   public function write($message, $error = false)
   {
       if (!$error) {
-          $this->logger->addWarning($message);
+          $this->logger->warning($message);
 
           return;
       }
-      $this->logger->addError($message);
+      $this->logger->error($message);
   }
 }
